@@ -30,12 +30,13 @@ namespace AutoBattle
         // prints the matrix that indicates the tiles of the battlefield
         public void drawBattlefield()
         {
+
             for (int i = 0; i < xLength; i++)
             {
                 for (int j = 0; j < yLength; j++)
                 {
-                    GridBox currentgrid = new GridBox();
-                    if (currentgrid.ocupied)
+                    
+                    if (grids[xLength * i + j].ocupied)
                     {
                         //if()
                         Console.Write("[X]\t");
