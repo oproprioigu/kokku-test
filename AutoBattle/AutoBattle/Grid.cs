@@ -20,7 +20,7 @@ namespace AutoBattle
             {
                 for (int j = 0; j < Columns; j++)
                 {
-                    GridBox newBox = new GridBox(j, i, false, Columns * i + j);
+                    GridBox newBox = new GridBox(j, i, false, false, Columns * i + j);
                     grids.Add(newBox);
                     Console.Write($"{newBox.Index}\n");
                 }
@@ -36,7 +36,7 @@ namespace AutoBattle
                 for (int j = 0; j < yLength; j++)
                 {
                     
-                    if (grids[xLength * i + j].ocupied)
+                    if (grids[(yLength * i) + j].ocupied)
                     {
                         //if()
                         Console.Write("[X]\t");

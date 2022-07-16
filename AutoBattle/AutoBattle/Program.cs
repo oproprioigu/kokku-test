@@ -11,7 +11,7 @@ namespace AutoBattle
     {
         static void Main(string[] args)
         {
-            Grid grid = new Grid(5, 5);
+            Grid grid = new Grid(10, 2);
             CharacterClass playerCharacterClass;
             GridBox PlayerCurrentLocation;
             GridBox EnemyCurrentLocation;
@@ -19,7 +19,6 @@ namespace AutoBattle
             Character EnemyCharacter;
             List<Character> AllPlayers = new List<Character>();
             int currentTurn = 0;
-            int numberOfPossibleTiles = grid.grids.Count;
             Setup(); 
 
 
@@ -80,8 +79,8 @@ namespace AutoBattle
                 Console.WriteLine($"Enemy Class Choice: {enemyClass}");
                 EnemyCharacter = new Character(enemyClass);
                 EnemyCharacter.Health = 100;
-                PlayerCharacter.BaseDamage = 20;
-                PlayerCharacter.PlayerIndex = 1;
+                EnemyCharacter.BaseDamage = 20;
+                EnemyCharacter.PlayerIndex = 1;
                 StartGame();
 
             }
@@ -154,7 +153,7 @@ namespace AutoBattle
 
             void AlocatePlayerCharacter()
             {
-                int random = 0;
+                int random = GetRandomInt(0, grid.grids.Count - 1);
                 GridBox RandomLocation = (grid.grids.ElementAt(random));
                 Console.Write($"{random}\n");
                 if (!RandomLocation.ocupied)
@@ -172,7 +171,7 @@ namespace AutoBattle
 
             void AlocateEnemyCharacter()
             {
-                int random = 24;
+                int random = GetRandomInt(0, grid.grids.Count - 1);
                 GridBox RandomLocation = (grid.grids.ElementAt(random));
                 Console.Write($"{random}\n");
                 if (!RandomLocation.ocupied)
