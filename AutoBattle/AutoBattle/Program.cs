@@ -11,7 +11,7 @@ namespace AutoBattle
     {
         static void Main(string[] args)
         {
-            Grid grid = new Grid(10, 2);
+            Grid grid = new Grid(7, 7);
             CharacterClass playerCharacterClass;
             GridBox PlayerCurrentLocation;
             GridBox EnemyCurrentLocation;
@@ -158,10 +158,7 @@ namespace AutoBattle
                 Console.Write($"{random}\n");
                 if (!RandomLocation.ocupied)
                 {
-                    GridBox PlayerCurrentLocation = RandomLocation;
-                    RandomLocation.ocupied = true;
-                    grid.grids[random] = RandomLocation;
-                    PlayerCharacter.currentBox = grid.grids[random];
+                    PlayerCharacter.OccupySpace(grid, random);
                     AlocateEnemyCharacter();
                 } else
                 {
@@ -176,10 +173,7 @@ namespace AutoBattle
                 Console.Write($"{random}\n");
                 if (!RandomLocation.ocupied)
                 {
-                    EnemyCurrentLocation = RandomLocation;
-                    RandomLocation.ocupied = true;
-                    grid.grids[random] = RandomLocation;
-                    EnemyCharacter.currentBox = grid.grids[random];
+                    EnemyCharacter.OccupySpace(grid, random);
                     grid.drawBattlefield();
                 }
                 else

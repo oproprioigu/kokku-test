@@ -38,8 +38,16 @@ namespace AutoBattle
                     
                     if (grids[(yLength * i) + j].ocupied)
                     {
-                        //if()
-                        Console.Write("[X]\t");
+                        if (grids[(yLength * i) + j].ocupiedPlayer)
+                        {
+                            Console.Write("[O]\t");
+
+                        }
+                        else 
+                        {
+                            Console.Write("[X]\t");
+                        }
+                            
                     }
                     else
                     {

@@ -118,10 +118,10 @@ namespace AutoBattle
         // Check in x and y directions if there is any character close enough to be a target.
         bool CheckCloseTargets(Grid battlefield)
         {
-            bool left = (battlefield.grids.Find(x => x.Index == currentBox.Index - 1).ocupied);
-            bool right = (battlefield.grids.Find(x => x.Index == currentBox.Index + 1).ocupied);
-            bool up = (battlefield.grids.Find(x => x.Index == currentBox.Index + battlefield.xLength).ocupied);
-            bool down = (battlefield.grids.Find(x => x.Index == currentBox.Index - battlefield.xLength).ocupied);
+            bool left = (battlefield.grids.Find(x => x.Index == currentBox.Index - 1).ocupied) && currentBox.Index % battlefield.yLength != 0;
+            bool right = (battlefield.grids.Find(x => x.Index == currentBox.Index + 1).ocupied) && currentBox.Index % battlefield.yLength != battlefield.yLength;
+            bool up = (battlefield.grids.Find(x => x.Index == currentBox.Index + battlefield.yLength).ocupied) && currentBox.Index > battlefield.yLength;
+            bool down = (battlefield.grids.Find(x => x.Index == currentBox.Index - battlefield.yLength).ocupied) && currentBox.Index < ((battlefield.yLength * battlefield.xLength) - 1) - battlefield.yLength;
 
             if (left || right || up || down) 
             {
@@ -139,10 +139,19 @@ namespace AutoBattle
 
         public void OccupySpace(Grid grid, int index)
         {
+            if (PlayerIndex == 0)
+            {
+                this.currentBox.ocupiedPlayer = false;
+            }
+
             this.currentBox.ocupied = false;
             grid.grids[currentBox.Index] = this.currentBox;
             this.currentBox = grid.grids[index];
             this.currentBox.ocupied = true;
+            if (PlayerIndex == 0)
+            {
+                this.currentBox.ocupiedPlayer = true;
+            }
             grid.grids[currentBox.Index] = this.currentBox;
         }
 
