@@ -33,11 +33,6 @@ namespace AutoBattle
             Died = true;
         }
 
-        public void WalkTO(bool CanWalk)
-        {
-
-        }
-
         public void StartTurn(Grid battlefield)
         {
 
@@ -70,7 +65,7 @@ namespace AutoBattle
                     OccupySpace(battlefield, index);
 
                     Console.WriteLine($"Player {PlayerIndex} walked right\n");
-                    battlefield.drawBattlefield();
+                    battlefield.DrawBattlefield();
 
                     return;
                 }
@@ -81,7 +76,7 @@ namespace AutoBattle
                     OccupySpace(battlefield, index);
 
                     Console.WriteLine($"Player {PlayerIndex} walked left\n");
-                    battlefield.drawBattlefield();
+                    battlefield.DrawBattlefield();
 
                     return;
                 }
@@ -92,7 +87,7 @@ namespace AutoBattle
                     var index = cel.Index;
                     OccupySpace(battlefield, index);
                     Console.WriteLine($"Player {PlayerIndex} walked up\n");
-                    battlefield.drawBattlefield();
+                    battlefield.DrawBattlefield();
 
                     return;
                 }
@@ -102,7 +97,7 @@ namespace AutoBattle
                     var index = cel.Index;
                     OccupySpace(battlefield, index);
                     Console.WriteLine($"Player {PlayerIndex} walked down\n");
-                    battlefield.drawBattlefield();
+                    battlefield.DrawBattlefield();
 
                     return;
                 }
@@ -130,7 +125,7 @@ namespace AutoBattle
             {
                 var damageDealt = Rand.Next(0, (int)BaseDamage) * DamageMultiplier;
                 target.TakeDamage(damageDealt);
-                Console.WriteLine($"Player {PlayerIndex} is attacking the player {Target.PlayerIndex} and did {damageDealt} damage\n");
+                Console.WriteLine($"Player {PlayerIndex} is attacking the Player {Target.PlayerIndex} and did {damageDealt} damage\n");
                 if (target.Health <= 0)
                 {
                     target.Die();

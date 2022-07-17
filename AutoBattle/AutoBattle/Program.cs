@@ -187,7 +187,7 @@ namespace AutoBattle
                 if (!RandomLocation.ocupied)
                 {
                     EnemyCharacter.OccupySpace(grid, random);
-                    grid.drawBattlefield();
+                    grid.DrawBattlefield();
                 }
                 else
                 {
