@@ -62,9 +62,11 @@ namespace AutoBattle
                 CharacterClass characterClass = (CharacterClass)classIndex;
                 Console.WriteLine($"Player Class Choice: {characterClass}");
                 PlayerCharacter = new Character(characterClass);
+                PlayerCharacter.Name = "Hero";
                 PlayerCharacter.Health = 100;
                 PlayerCharacter.BaseDamage = 20;
                 PlayerCharacter.PlayerIndex = 0;
+                PlayerCharacter.DamageMultiplier = 1;
                 
                 CreateEnemyCharacter();
 
@@ -78,9 +80,11 @@ namespace AutoBattle
                 CharacterClass enemyClass = (CharacterClass)randomInteger;
                 Console.WriteLine($"Enemy Class Choice: {enemyClass}");
                 EnemyCharacter = new Character(enemyClass);
+                EnemyCharacter.Name = "Villain";
                 EnemyCharacter.Health = 100;
                 EnemyCharacter.BaseDamage = 20;
                 EnemyCharacter.PlayerIndex = 1;
+                EnemyCharacter.DamageMultiplier = 1;
                 StartGame();
 
             }
@@ -101,7 +105,8 @@ namespace AutoBattle
 
                 if (currentTurn == 0)
                 {
-                    //AllPlayers.Sort();  
+                    //var rand = new Random();
+                    //AllPlayers.OrderBy(item => rand.Next());  
                 }
 
                 foreach(Character character in AllPlayers)
@@ -115,14 +120,22 @@ namespace AutoBattle
 
             void HandleTurn()
             {
-                if(PlayerCharacter.Health == 0)
-                {
-                    return;
-                } else if (EnemyCharacter.Health == 0)
+                if(PlayerCharacter.Health <= 0)
                 {
                     Console.Write(Environment.NewLine + Environment.NewLine);
 
-                    // endgame?
+                    Console.WriteLine($"The winner of the battle is Player {EnemyCharacter.PlayerIndex}!\n");
+                    Console.WriteLine($"Songs will be sung in {EnemyCharacter.Name}'s name!\n");
+
+                    Console.Write(Environment.NewLine + Environment.NewLine);
+
+                    return;
+                } else if (EnemyCharacter.Health <= 0)
+                {
+                    Console.Write(Environment.NewLine + Environment.NewLine);
+
+                    Console.WriteLine($"The winner of the battle is Player {PlayerCharacter.PlayerIndex}!\n");
+                    Console.WriteLine($"Songs will be sung in {PlayerCharacter.Name}'s name!\n");
 
                     Console.Write(Environment.NewLine + Environment.NewLine);
 

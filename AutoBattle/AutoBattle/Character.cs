@@ -20,21 +20,17 @@ namespace AutoBattle
         {
 
         }
+        public bool Died = false;
 
-
-        public bool TakeDamage(float amount)
+        public void TakeDamage(float amount)
         {
-            if((Health -= BaseDamage) <= 0)
-            {
-                Die();
-                return true;
-            }
-            return false;
+            Health -= amount;
         }
 
         public void Die()
         {
-            //TODO >> maybe kill him?
+            Console.WriteLine($"Player {PlayerIndex} has died!\n");
+            Died = true;
         }
 
         public void WalkTO(bool CanWalk)
@@ -48,8 +44,6 @@ namespace AutoBattle
             if (CheckCloseTargets(battlefield))
             {
                 Attack(Target);
-
-
                 return;
             }
             else
@@ -132,9 +126,16 @@ namespace AutoBattle
 
         public void Attack (Character target)
         {
-            var damageDealt = Rand.Next(0, (int)BaseDamage);
-            target.TakeDamage(damageDealt);
-            Console.WriteLine($"Player {PlayerIndex} is attacking the player {Target.PlayerIndex} and did {damageDealt} damage\n");
+            if (!Died && !target.Died)
+            {
+                var damageDealt = Rand.Next(0, (int)BaseDamage) * DamageMultiplier;
+                target.TakeDamage(damageDealt);
+                Console.WriteLine($"Player {PlayerIndex} is attacking the player {Target.PlayerIndex} and did {damageDealt} damage\n");
+                if (target.Health <= 0)
+                {
+                    target.Die();
+                }
+            }
         }
 
         public void OccupySpace(Grid grid, int index)
